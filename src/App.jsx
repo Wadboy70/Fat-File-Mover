@@ -4,7 +4,6 @@ import { WebSocketContext } from './socketContext';
 import OpeningPage from './components/OpeningPage/OpeningPage';
 import RoomPage from './components/RoomPage/RoomPage';
 import './App.css';
-import uploadFile from './components/uploadFiles';
 
 function App() {
   const history = useHistory();
@@ -37,7 +36,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <button onClick = {uploadFile}>upload</button> */}
       <Switch>
         <Route exact path = '/'>
           <OpeningPage joinRoom = { joinRoom } setRoom = {setRoom}/>

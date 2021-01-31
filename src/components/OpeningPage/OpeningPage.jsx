@@ -10,6 +10,7 @@ const OpeningPage = ({joinRoom, setRoom}) => {
     const [error, setError] = useState(null);
 
     const createRoom = () => {
+        console.log('creating room')
         socket.emit('create room');
         
         socket.on("admit create", value => {
@@ -26,20 +27,22 @@ const OpeningPage = ({joinRoom, setRoom}) => {
     
   const handleChange = e => setRoomCode(e.target.value);
     return(
-        <div>
-            <div>
-                <div>
-                <label htmlFor="newRoom">newRoom</label>
-                <Button onClick = {createRoom}>
-                    New Room
-                </Button>
+        <div className = 'opening'>
+            <div className = 'openingBox'>
+                <div className = 'roomChoice'>
+                    <label htmlFor="newRoom">newRoom</label>
+                    <Button onClick = {createRoom}>
+                        New Room
+                    </Button>
                 </div>
-                <div>
-                <label htmlFor="joinRoom">joinRoom</label>
-                <input type="text" onChange = {handleChange}/>
-                <Button onClick = {() => joinRoom(setError, roomCode)}>
-                    Join Room
-                </Button>
+                <div className = 'roomChoice joinRoom'>
+                    <div>
+                        <label htmlFor="joinRoom">joinRoom</label>
+                        <input type="text" onChange = {handleChange}/>
+                    </div>
+                    <Button onClick = {() => joinRoom(setError, roomCode)}>
+                        Join Room
+                    </Button>
                 </div>
             </div>
             {

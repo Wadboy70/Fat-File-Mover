@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-image: url('/src/assets/8bitbackground.jpg');
+  height: 100vh;
+  background-size: cover;
+  max-height: 100vh;
+  overflow: hidden;
+  padding: 5%;
 }
 
 .App-logo {
@@ -29,4 +35,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+input{
+  font-family: inherit;
+}
+button, input::-webkit-file-upload-button{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background: linear-gradient(#e66465, #9198e5);
+  font-family: 'Press Start 2P';
+  font-family: inherit;
+  border: none;
+  width: fit-content;
 }

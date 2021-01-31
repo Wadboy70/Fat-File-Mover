@@ -7,6 +7,7 @@ const socket = io(process.env.NODE_ENV === "development" ? 'http://localhost:808
     withCredentials: true
 });
 
+
 socket.on("files", files => {
     console.log('got files')
     console.log(files)

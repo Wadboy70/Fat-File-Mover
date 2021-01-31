@@ -1,32 +1,40 @@
-// import Storage from '@google-cloud/storage';
-// import App from '../App';
-// /**
-//  * TODO(developer): Uncomment the following lines before running the sample.
-//  */
-// const bucketName = 'fat-cloud-storage';
-// const filename = './App.css';
+import firebase from "firebase/app";
 
-// // Creates a client
-// const storage = new Storage();
+import "firebase/auth";
+import "firebase/storage";
 
-// async function uploadFile() {
-//   // Uploads a local file to the bucket
-//   await storage.bucket(bucketName).upload(filename, {
-//     // Support for HTTP requests made with `Accept-Encoding: gzip`
-//     gzip: true,
-//     // By setting the option `destination`, you can change the name of the
-//     // object you are uploading to a bucket.
-//     metadata: {
-//       // Enable long-lived HTTP caching headers
-//       // Use only if the contents of the file will never change
-//       // (If the contents will change, use cacheControl: 'no-cache')
-//       cacheControl: 'public, max-age=31536000',
-//     },
-//   });
+const firebaseConfig = {
+    apiKey: "AIzaSyDVmZzfeB6g4symEPgKLKrCvZ2NZ_Dkj1Q",
+    authDomain: "fat-file-transfer-70731.firebaseapp.com",
+    projectId: "fat-file-transfer-70731",
+    storageBucket: "fat-file-transfer-70731.appspot.com",
+    messagingSenderId: "859791158093",
+    appId: "1:859791158093:web:aeae49849514341d106504",
+    measurementId: "G-BY1JP3PTM0"
+  };
 
-//   console.log(`${filename} uploaded to ${bucketName}.`);
-// }
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
 
-// uploadFile().catch(console.error);
+const storageRef = app.storage().ref();
 
-// export default uploadFile;
+export const auth = firebase.auth();
+
+export const fileUpload = async (file, name) => {
+    const fileRef = storageRef.child(`/${name}`);
+    return fileRef.put(file).then(res => res).catch(err => console.log(err));
+};
+
+export const downloadFile = (path) => {
+    return storageRef.child(path).getDownloadURL().then(url => url).catch(err => err);
+}
+
+export const fileList = () => {
+    const listRef = storageRef.child('/');
+    return listRef.listAll().then(res => res);
+};
+
+export const deleteFile = (path) => {
+    const listRef = storageRef.child(path);
+    return listRef.delete().then(res => res).catch(err => err);
+};

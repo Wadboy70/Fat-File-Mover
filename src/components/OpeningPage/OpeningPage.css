@@ -1,0 +1,37 @@
+.opening{
+}
+
+.openingBox{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60vh;
+    flex-wrap: wrap;
+}
+
+.roomChoice{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.roomChoice > button{
+    margin-left: 0;
+}
+
+.joinRoom > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.roomChoice>div>input{
+    height: 1rem;
+}
+
+label{
+    margin-bottom: 10px;
+}
