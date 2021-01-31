@@ -10,7 +10,9 @@ const socket = io(process.env.NODE_ENV === "development" ? 'http://localhost:808
 socket.on("files", files => {
     console.log('got files')
     console.log(files)
-})
+});
+
+
 export const WebSocketProvider = ({children}) => {
     return (
         <WebSocketContext.Provider value = { socket }>

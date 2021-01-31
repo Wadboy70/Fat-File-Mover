@@ -1,32 +1,23 @@
 import './App.css';
-import { WebSocketContext } from './socketContext';
-import Button from './components/Button/Button';
-import { useContext, useEffect } from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import OpeningPage from './components/OpeningPage/OpeningPage';
 
 function App() {
-  const socket = useContext(WebSocketContext);
-
+  const history = useHistory();
+  const [room, setRoom] = useState(null);
   useEffect(() => {
-  })
-
-  const createRoom = () => {
-    socket.emit('create room','JH547');
-  }
-
+    if(room)
+      history.push(room);
+  }, [room, history])
   return (
     <div className="App">
-      <div>
-        <div>
-          <label htmlFor="newRoom">newRoom</label>
-          <Button variant = 'contained' color = 'primary' onClick = {createRoom}>
-            New Room
-          </Button>
-        </div>
-        <div>
-          <label htmlFor="joinRoom">joinRoom</label>
-          <input type="text"/>
-        </div>
-      </div>
+      <Switch>
+        <Route exact path = '/'>
+          <OpeningPage setRoom = { setRoom }/>
+        </Route>
+        {/* <Route exact path = '/:room' component = {RoomPage}> */}
+      </Switch>
     </div>
   );
 }

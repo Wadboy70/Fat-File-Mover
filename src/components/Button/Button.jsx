@@ -14,7 +14,7 @@ const Burtun = (props) => {
             { ...props }
         >
             {
-                children ?? children
+                children && children
             }
         </button>
     );
