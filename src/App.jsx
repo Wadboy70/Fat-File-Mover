@@ -11,18 +11,19 @@ function App() {
   const socket = useContext(WebSocketContext);
   
   const joinRoom = (setError, roomCode) => {
-    socket.emit('join room', roomCode);
     
     socket.on("admit join", value => {
       if (value.status) {
-          try {
-              setRoom(value.room)
-          } catch (error) {
-              setError('Can\'t set room code')
-          }
+        try {
+          setRoom(value.room)
+        } catch (error) {
+          setError('Can\'t set room code')
+        }
       }
       else setError('Room code is invalid');
     });
+    
+    socket.emit('join room', roomCode);
   }
   const redirErr = () => setRoom(null);
 
@@ -36,6 +37,14 @@ function App() {
 
   return (
     <div className="App">
+      <header className = 'header'>
+        <span>
+          Trans-Fat-Files
+        </span>
+        <span>
+          For moving them FAT files :)
+        </span>
+        </header>
       <Switch>
         <Route exact path = '/'>
           <OpeningPage joinRoom = { joinRoom } setRoom = {setRoom}/>

@@ -13,6 +13,16 @@ socket.on("files", files => {
     console.log(files)
 });
 
+export const subscribeToFileUpdates = (func) => {
+    socket.on('update', files =>{
+        console.log('sent files')
+        return func(files);
+    })
+}
+
+export const disconnectFromSocket = (func) => {
+    socket?.disconnect();
+}
 
 export const WebSocketProvider = ({children}) => {
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Button from '../Button/Button';
 import { WebSocketContext } from '../../socketContext';
 import './OpeningPage.css';
@@ -24,18 +24,22 @@ const OpeningPage = ({joinRoom, setRoom}) => {
             else setError('Room code is invalid');
       });
     };
+
+    useEffect(()=>{
+        console.log(error)
+    },[error])
     
   const handleChange = e => setRoomCode(e.target.value);
     return(
         <div className = 'opening'>
             <div className = 'openingBox'>
-                <div className = 'roomChoice'>
+                <form className = 'roomChoice' onSubmit = {e => e.preventDefault()}>
                     <label htmlFor="newRoom">newRoom</label>
                     <Button onClick = {createRoom}>
                         New Room
                     </Button>
-                </div>
-                <div className = 'roomChoice joinRoom'>
+                </form>
+                <form className = 'roomChoice joinRoom' onSubmit = {e => e.preventDefault()}>
                     <div>
                         <label htmlFor="joinRoom">joinRoom</label>
                         <input type="text" onChange = {handleChange}/>
@@ -43,7 +47,7 @@ const OpeningPage = ({joinRoom, setRoom}) => {
                     <Button onClick = {() => joinRoom(setError, roomCode)}>
                         Join Room
                     </Button>
-                </div>
+                </form>
             </div>
             {
                 error &&

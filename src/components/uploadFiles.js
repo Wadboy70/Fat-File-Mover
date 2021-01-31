@@ -22,11 +22,11 @@ export const auth = firebase.auth();
 
 export const fileUpload = async (file, name) => {
     const fileRef = storageRef.child(`/${name}`);
-    return fileRef.put(file).then(res => res).catch(err => console.log(err));
+    return fileRef.put(file).then(res => res);
 };
 
-export const downloadFile = (path) => {
-    return storageRef.child(path).getDownloadURL().then(url => url).catch(err => err);
+export const downloadFile = async (path) => {
+    return storageRef.child(path).getDownloadURL().then(url => url);
 }
 
 export const fileList = () => {
