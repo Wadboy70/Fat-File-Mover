@@ -1,20 +1,16 @@
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv');
+const dotenv = require('dotenv').config();
 const publicPath = path.join(__dirname, '..','build');
 console.log(process.env.port)
 const app = express();
-app.use(bodyParser.json());
 app.use(express.static(publicPath));
-app.use(cors());
 
 app.get('*', (req,res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-const server = require('http').Server(app);
+const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 let numConnections = 0;
@@ -88,7 +84,7 @@ io.on('connection', socket => {
       try {
           if (rooms.hasOwnProperty(room)){
             socket.join(room);
-            io.to(socket.id).emit('update', rooms[`${room}`]?.files || []);
+            io.to(socket.id).emit('update', rooms[`${room}`].files || []);
             io.to(socket.id).emit('admit join', {status:true, room:room});
           }
           else{
