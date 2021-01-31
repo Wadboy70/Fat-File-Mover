@@ -5,6 +5,7 @@ const RoomPage = ({ room }) => {
     return(
         <div className = 'roomPage'>
             <p>Room: {room}</p>
+            
         </div>
     );
 };
