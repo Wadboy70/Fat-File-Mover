@@ -3,7 +3,12 @@ import { io } from "socket.io-client";
 
 export const WebSocketContext = createContext(null);
 
-const socket = io("https://fat-file-transfer.ue.r.appspot.com");
+const socket = io("https://fat-file-transfer.ue.r.appspot.com", {
+    withCredentials: true,
+    extraHeaders: {
+      "Access-Control-Allow-Origin": true
+    }
+  });
 
 
 socket.on("files", files => {
