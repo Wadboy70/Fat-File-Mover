@@ -2,9 +2,9 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-require('dotenv').config({path:__dirname+'../.env'});
+require('dotenv');
 const publicPath = path.join(__dirname, '..','build');
-
+console.log(process.env.port)
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static(publicPath));
@@ -120,10 +120,8 @@ io.on('connection', socket => {
 });
 /////////////////////////////////////////////////////////////
 
-if (module === require.main) {
-    const PORT = process.env.PORT || 8080;
-    server.listen(PORT, () => {
-      console.log(`App listening on port ${PORT}`);
-      console.log('Press Ctrl+C to quit.');
-    });
-  }
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+    console.log('Press Ctrl+C to quit.');
+});
